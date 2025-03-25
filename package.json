@@ -1,0 +1,16 @@
+{
+  "name": "tarot-shopify-theme",
+  "version": "1.0.0",
+  "description": "Shopify theme with tarot card reading feature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shopify",
+    "tarot",
+    "theme"
+  ],
+  "author": "",
+  "license": "ISC"
+}
