@@ -1,0 +1,76 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Tarot Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom Developer",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#6B5B95"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary Color",
+        "default": "#FFB347"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#F5F5F5"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body Font",
+        "default": "helvetica_n4"
+      }
+    ]
+  },
+  {
+    "name": "Tarot Settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "tarot_page_title",
+        "label": "Tarot Page Title",
+        "default": "塔罗牌能量场匹配"
+      },
+      {
+        "type": "textarea",
+        "id": "tarot_page_description",
+        "label": "Tarot Page Description",
+        "default": "抽取一张塔罗牌，了解你的能量场，并找到最匹配的饰品。"
+      },
+      {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Number of Products to Show",
+        "default": 3
+      }
+    ]
+  }
+]

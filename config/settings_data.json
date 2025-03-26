@@ -1,0 +1,18 @@
+{
+  "current": {
+    "colors": {
+      "primary_color": "#6B5B95",
+      "secondary_color": "#FFB347",
+      "background_color": "#F5F5F5"
+    },
+    "typography": {
+      "heading_font": "helvetica_n4",
+      "body_font": "helvetica_n4"
+    },
+    "tarot_settings": {
+      "tarot_page_title": "塔罗牌能量场匹配",
+      "tarot_page_description": "抽取一张塔罗牌，了解你的能量场，并找到最匹配的饰品。",
+      "products_to_show": 3
+    }
+  }
+}

@@ -1,0 +1,101 @@
+/* 塔罗牌读取器样式 */
+
+.page-tarot {
+  padding: 2rem 0;
+}
+
+.tarot-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tarot-header h1 {
+  margin-bottom: 1rem;
+}
+
+.tarot-description {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 响应式调整 */
+@media (max-width: 767px) {
+  .tarot-header {
+    margin-bottom: 2rem;
+  }
+  
+  .tarot-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .tarot-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+/* 塔罗牌抽取动画增强 */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(107, 91, 149, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(107, 91, 149, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(107, 91, 149, 0.5); }
+}
+
+.tarot-deck:hover .tarot-card-back {
+  animation: glow 2s infinite;
+}
+
+/* 产品卡片悬停效果增强 */
+.product-card {
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.product-card:hover {
+  border-color: #6B5B95;
+}
+
+.product-card-energy-match {
+  position: relative;
+  padding-left: 20px;
+}
+
+.product-card-energy-match:before {
+  content: '✨';
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+/* 抽卡按钮脉动效果 */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.draw-card-btn {
+  animation: pulse 2s infinite;
+}
+
+.draw-card-btn:hover {
+  animation: none;
+}

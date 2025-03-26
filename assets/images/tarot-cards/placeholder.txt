@@ -1,0 +1,33 @@
+这个目录将用于存放塔罗牌图片。
+
+在实际应用中，您需要添加以下图片文件：
+- fool.jpg - 愚者
+- magician.jpg - 魔术师
+- high-priestess.jpg - 女祭司
+- empress.jpg - 皇后
+- emperor.jpg - 皇帝
+- hierophant.jpg - 教皇
+- lovers.jpg - 恋人
+- chariot.jpg - 战车
+- strength.jpg - 力量
+- hermit.jpg - 隐士
+- wheel-of-fortune.jpg - 命运之轮
+- justice.jpg - 正义
+- hanged-man.jpg - 倒吊人
+- death.jpg - 死神
+- temperance.jpg - 节制
+- devil.jpg - 恶魔
+- tower.jpg - 塔
+- star.jpg - 星星
+- moon.jpg - 月亮
+- sun.jpg - 太阳
+- judgement.jpg - 审判
+- world.jpg - 世界
+
+以及产品图片：
+- moonstone-bracelet.jpg
+- amethyst-necklace.jpg
+- sunstone-earrings.jpg
+- labradorite-bangle.jpg
+- aquamarine-ring.jpg
+- turquoise-necklace.jpg

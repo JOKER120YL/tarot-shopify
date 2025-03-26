@@ -1,0 +1,410 @@
+{% comment %}
+  塔罗牌抽卡组件
+{% endcomment %}
+
+<div class="tarot-card-reader" data-section-id="{{ section.id }}" data-section-type="tarot-card-reader">
+  <div class="tarot-card-container">
+    <div class="tarot-deck-container">
+      <div class="tarot-deck" id="tarotDeck">
+        <div class="tarot-card-back">
+          <div class="card-back-design"></div>
+        </div>
+      </div>
+      <button class="draw-card-btn" id="drawCardBtn">抽取塔罗牌</button>
+    </div>
+    
+    <div class="tarot-result hidden" id="tarotResult">
+      <div class="tarot-card-display">
+        <div class="tarot-card-image-container">
+          <img src="" alt="塔罗牌" id="tarotCardImage" class="tarot-card-image">
+        </div>
+        <div class="tarot-card-info">
+          <h2 class="tarot-card-name" id="tarotCardName"></h2>
+          <div class="tarot-card-meaning" id="tarotCardMeaning"></div>
+          <div class="tarot-card-energy" id="tarotCardEnergy"></div>
+        </div>
+      </div>
+      
+      <div class="tarot-product-recommendations">
+        <h3>{{ section.settings.recommendation_title }}</h3>
+        <div class="tarot-product-grid" id="tarotProductGrid">
+          <!-- 产品推荐将通过JavaScript动态加载 -->
+        </div>
+      </div>
+      
+      <button class="draw-again-btn" id="drawAgainBtn">再抽一次</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tarot-card-reader {
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .tarot-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tarot-deck-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .tarot-deck {
+    width: 200px;
+    height: 340px;
+    perspective: 1000px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .tarot-card-back {
+    width: 100%;
+    height: 100%;
+    background-color: {{ section.settings.card_back_color }};
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .card-back-design {
+    width: 80%;
+    height: 80%;
+    background-image: url('{{ section.settings.card_back_image | img_url: 'master' }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid {{ section.settings.card_border_color }};
+  }
+  
+  .draw-card-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .draw-card-btn:hover {
+    background-color: {{ section.settings.button_hover_color }};
+  }
+  
+  .tarot-result {
+    width: 100%;
+    max-width: 900px;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .tarot-result.hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  .tarot-card-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: {{ section.settings.result_bg_color }};
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .tarot-card-display {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+  
+  .tarot-card-image-container {
+    width: 200px;
+    height: 340px;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (min-width: 768px) {
+    .tarot-card-image-container {
+      margin-bottom: 0;
+      margin-right: 2rem;
+    }
+  }
+  
+  .tarot-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .tarot-card-info {
+    flex: 1;
+  }
+  
+  .tarot-card-name {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: {{ section.settings.heading_color }};
+  }
+  
+  .tarot-card-meaning {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .tarot-card-energy {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: {{ section.settings.energy_text_color }};
+  }
+  
+  .tarot-product-recommendations {
+    margin-top: 2rem;
+  }
+  
+  .tarot-product-recommendations h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: {{ section.settings.heading_color }};
+  }
+  
+  .tarot-product-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 576px) {
+    .tarot-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .tarot-product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .product-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card-image-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .product-card:hover .product-card-image {
+    transform: scale(1.05);
+  }
+  
+  .product-card-info {
+    padding: 1rem;
+  }
+  
+  .product-card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-card-price {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: {{ section.settings.price_color }};
+  }
+  
+  .product-card-energy-match {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    color: {{ section.settings.energy_text_color }};
+  }
+  
+  .product-card-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+  }
+  
+  .product-card-link:hover {
+    background-color: {{ section.settings.button_hover_color }};
+  }
+  
+  .draw-again-btn {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .draw-again-btn:hover {
+    background-color: {{ section.settings.button_hover_color }};
+  }
+  
+  /* 卡牌翻转动画 */
+  .tarot-card-animation {
+    transform: rotateY(180deg);
+  }
+</style>
+
+{{ 'tarot-reader.css' | asset_url | stylesheet_tag }}
+{{ 'tarot-reader.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "塔罗牌读取器",
+  "settings": [
+    {
+      "type": "text",
+      "id": "recommendation_title",
+      "label": "推荐产品标题",
+      "default": "为你推荐的能量匹配饰品"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "显示产品数量",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "卡牌外观设置"
+    },
+    {
+      "type": "color",
+      "id": "card_back_color",
+      "label": "卡牌背面颜色",
+      "default": "#6B5B95"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_back_image",
+      "label": "卡牌背面图案"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "卡牌边框颜色",
+      "default": "#FFB347"
+    },
+    {
+      "type": "header",
+      "content": "结果显示设置"
+    },
+    {
+      "type": "color",
+      "id": "result_bg_color",
+      "label": "结果背景颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "标题文字颜色",
+      "default": "#6B5B95"
+    },
+    {
+      "type": "color",
+      "id": "energy_text_color",
+      "label": "能量描述文字颜色",
+      "default": "#8A7EB5"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "价格文字颜色",
+      "default": "#FF6B6B"
+    },
+    {
+      "type": "header",
+      "content": "按钮设置"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "按钮颜色",
+      "default": "#6B5B95"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "按钮文字颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "按钮悬停颜色",
+      "default": "#8A7EB5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "塔罗牌读取器",
+      "category": "互动"
+    }
+  ]
+}
+{% endschema %}
+
+{% schema %}
+{
+  "name": "塔罗牌读取器",
+  "settings": [
+    {
+      "type": "text",
+      "id": "recommendation_title",
+      "label": "推荐产品标题",
+      "default": "为你推荐的能
