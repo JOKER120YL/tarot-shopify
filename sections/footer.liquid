@@ -1,0 +1,15 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="page-width">
+    <div class="site-footer__content">
+      <div class="site-footer__copyright">
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}
+      </div>
+      
+      <div class="site-footer__links">
+        {% for link in linklists.footer.links %}
+          <a href="{{ link.url }}" class="site-footer__link">{{ link.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>

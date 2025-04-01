@@ -1,0 +1,25 @@
+<header class="site-header" role="banner">
+  <div class="page-width">
+    <div class="site-header__content">
+      <div class="site-header__logo-wrapper">
+        <a href="/" class="site-header__logo">
+          {% if settings.logo %}
+            <img src="{{ settings.logo | img_url: 'master' }}" alt="{{ shop.name }}" class="site-header__logo-image">
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+      </div>
+      
+      <nav class="site-navigation" role="navigation">
+        <ul class="site-nav">
+          {% for link in linklists.main-menu.links %}
+            <li class="site-nav__item">
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,6 +1,7 @@
 // 塔罗牌抽卡功能
 
-import tarotData from './tarot-data.js';
+// 使用全局变量方式获取tarotData，而不是使用import
+// 确保tarot-data.js在HTML中先于tarot-reader.js加载
 
 document.addEventListener('DOMContentLoaded', function() {
   // 初始化塔罗牌读取器
@@ -96,7 +97,7 @@ function displayCardResult(card) {
   
   // 设置卡牌图片
   if (tarotCardImage) {
-    tarotCardImage.src = card.image.includes('http') ? card.image : `{{ 'assets/' | append: card.image | asset_url }}`;
+    tarotCardImage.src = card.image.includes('http') ? card.image : `/assets/${card.image}`;
     tarotCardImage.alt = card.name;
   }
   
@@ -204,7 +205,7 @@ function getProductRecommendations(card) {
     
     productCard.innerHTML = `
       <div class="product-card-image-container">
-        <img src="${product.image.includes('http') ? product.image : `{{ '${product.image}' | asset_url }}`}" alt="${product.title}" class="product-card-image">
+        <img src="${product.image.includes('http') ? product.image : `/assets/${product.image}`}" alt="${product.title}" class="product-card-image">
       </div>
       <div class="product-card-info">
         <h4 class="product-card-title">${product.title}</h4>

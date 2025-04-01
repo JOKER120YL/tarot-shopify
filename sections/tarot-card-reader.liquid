@@ -296,8 +296,9 @@
   }
 </style>
 
-{{ 'tarot-reader.css' | asset_url | stylesheet_tag }}
-{{ 'tarot-reader.js' | asset_url | script_tag }}
+<link rel="stylesheet" href="/assets/tarot-reader.css">
+<script src="/assets/tarot-data.js"></script>
+<script src="/assets/tarot-reader.js"></script>
 
 {% schema %}
 {

@@ -4,31 +4,11 @@
 
 <div class="page-width page-tarot">
   <div class="tarot-header">
-    <h1>{{ section.settings.tarot_page_title | default: settings.tarot_settings.tarot_page_title }}</h1>
+    <h1>{{ page.title }}</h1>
     <div class="tarot-description">
-      {{ section.settings.tarot_page_description | default: settings.tarot_settings.tarot_page_description }}
+      {{ page.content }}
     </div>
   </div>
 
   {% section 'tarot-card-reader' %}
 </div>
-
-{% schema %}
-{
-  "name": "塔罗牌页面",
-  "settings": [
-    {
-      "type": "text",
-      "id": "tarot_page_title",
-      "label": "页面标题",
-      "default": "塔罗牌能量场匹配"
-    },
-    {
-      "type": "textarea",
-      "id": "tarot_page_description",
-      "label": "页面描述",
-      "default": "抽取一张塔罗牌，了解你的能量场，并找到最匹配的饰品。"
-    }
-  ]
-}
-{% endschema %}
